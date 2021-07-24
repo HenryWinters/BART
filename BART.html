@@ -6,27 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>BART Departure Times</title>
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">    
   <link rel="stylesheet" href="/BART.css">
 </head>
 
 <body>
     <div id="station-selector-container"> 
-        <label for="station-selector">What station are you located at?</label>
+        <label for="station-selector">Select station to view upcoming departures:</label>
         <select id="station-selector">
 
         </select>
     </div>
     <div id="upcoming-departures-container">
-        <h1>Northbound Departures</h1>
-        <div id="northbound-departures">
+        <div id="northbound-departures-container">
+            <h1>Northbound Departures</h1>
+            <div id="northbound-departures">
 
+            </div>
         </div>
-        <h1>Southbound Departures</h1>
-        <div id="southbound-departures">
+        <div id="southbound-departures-container">
+            <h1>Southbound Departures</h1>
+            <div id="southbound-departures">
 
-        </div>
-        
+            </div>
+    </div> 
     </div>
 
   <script src="/BART.js"></script>

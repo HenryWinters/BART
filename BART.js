@@ -25,7 +25,6 @@ stationSelector.addEventListener('change', (event) => {
     southboundDepartures.textContent = "";
     let stationSelection = event.target.value; 
     getStationDepartures(stationSelection);
-    console.log(stationSelection);
 });
 
 function getStationDepartures(stationToSearchFor) { 
@@ -37,8 +36,7 @@ function getStationDepartures(stationToSearchFor) {
             if (allStationsArr[i]['name'] == stationToSearchFor) {
                 let stationObj = allStationsArr[i];
                 let stationDeparturesArr = stationObj['etd'];
-                console.log(stationObj);
-                console.log(stationDeparturesArr);
+                stationDeparturesArr.sort((a,b) => parseInt(a['estimate'][0]['minutes']) - parseInt(b['estimate'][0]['minutes']));
                 for (let j = 0; j < stationDeparturesArr.length; j++) {
                     let departureDestination = stationDeparturesArr[j]['destination'];
                     let departureTime = stationDeparturesArr[j]['estimate'][0]['minutes'];
@@ -46,12 +44,20 @@ function getStationDepartures(stationToSearchFor) {
                     let departureColor = stationDeparturesArr[j]['estimate'][0]['hexcolor'];
                     let departurePlatform = stationDeparturesArr[j]['estimate'][0]['platform'];
                     let departureLength = stationDeparturesArr[j]['estimate'][0]['length'];
-                    console.log(departureDirection);
-                    let departureListing = document.createElement('p'); 
-                    departureListing.textContent = `A ${departureLength}-car train heading towards ${departureDestination} is arriving in ${departureTime} minutes`;
-                    if (departureDirection === "North") {
-                        northboundDepartures.appendChild(departureListing);
-                    } else southboundDepartures.appendChild(departureListing);
+
+                    let departureDiv = document.createElement('div');
+                    departureDiv.style.display = 'flex';
+
+                    let departureListing = document.createElement('p');
+                    let departureColorDisplay = document.createElement('div');
+                    departureColorDisplay.setAttribute('id', 'departure-color-display');
+                    departureColorDisplay.style['background-color'] = departureColor;
+                    Number.isInteger(parseInt(departureTime)) ? departureListing.textContent = `${departureLength}-car train heading towards ${departureDestination} 
+                        is arriving in ${departureTime} minutes on Platform ${departurePlatform}` : departureListing.textContent = `${departureLength}-car train 
+                        heading towards ${departureDestination} is ${departureTime} right now on Platform ${departurePlatform}`;
+                    departureDirection === "North" ? departureDiv.appendChild(departureListing) && departureDiv.appendChild(departureColorDisplay) 
+                    && northboundDepartures.appendChild(departureDiv) 
+                    : departureDiv.appendChild(departureListing) && departureDiv.appendChild(departureColorDisplay) && southboundDepartures.appendChild(departureDiv);
                 }
 
             } 

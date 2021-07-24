@@ -1,0 +1,31 @@
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+select {
+    background-color: rgb(18, 0, 100); 
+    color: white; 
+    font-size: 1em; 
+}
+
+#departure-color-display {
+    width: 20px; 
+    height: 20px;
+    border-radius: 50px; 
+    margin-left: 10px;
+    align-self: center;  
+}
+
+#upcoming-departures-container {
+    width: 800px; 
+    display: column; 
+    justify-content: space-evenly; 
+    background-color: rgb(220, 221, 255);
+    border: 1px solid black;
+    border-radius: 10px; 
+    box-shadow: 1px 1px 1px 1px grey;  
+}
+
+#northbound-departures-container, #southbound-departures-container  {
+    margin-left: 20px;
+}
