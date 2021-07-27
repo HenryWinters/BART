@@ -19,7 +19,7 @@ select {
 #upcoming-departures-container {
     width: 800px; 
     display: column; 
-    justify-content: space-evenly; 
+    justify-content: space-evenly;  
     background-color: rgb(220, 221, 255);
     border: 1px solid black;
     border-radius: 10px; 
@@ -28,4 +28,23 @@ select {
 
 #northbound-departures-container, #southbound-departures-container  {
     margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 50px; 
+}
+
+
+#northbound-departures, #southbound-departures { 
+    display: flex; 
+    justify-content: space-between;  
+    text-align: center; 
+}
+
+
+#northbound-departures h3, #southbound-departures h3 { 
+    text-decoration: underline; 
+}
+
+#destination, #minutes, #train-size, #platform, #color { 
+    display: flex; 
+    flex-direction: column; 
 }

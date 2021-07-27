@@ -21,8 +21,7 @@ function generateStationOptions() {
 generateStationOptions(); 
 
 stationSelector.addEventListener('change', (event) => {
-    northboundDepartures.textContent = "";
-    southboundDepartures.textContent = "";
+    document.querySelectorAll('p').forEach(element => element.remove());
     let stationSelection = event.target.value; 
     getStationDepartures(stationSelection);
 });
@@ -45,19 +44,44 @@ function getStationDepartures(stationToSearchFor) {
                     let departurePlatform = stationDeparturesArr[j]['estimate'][0]['platform'];
                     let departureLength = stationDeparturesArr[j]['estimate'][0]['length'];
 
-                    let departureDiv = document.createElement('div');
-                    departureDiv.style.display = 'flex';
+                    let destinationContainerNorth = document.querySelector('#destination-north');
+                    let timeContainerNorth = document.querySelector('#minutes-north');
+                    let lengthContainerNorth = document.querySelector('#train-length-north');
+                    let platformContainerNorth = document.querySelector('#platform-north');
+                    let colorContainerNorth = document.querySelector('#color-north');
 
-                    let departureListing = document.createElement('p');
-                    let departureColorDisplay = document.createElement('div');
+                    let destinationContainerSouth = document.querySelector('#destination-south');
+                    let timeContainerSouth = document.querySelector('#minutes-south');
+                    let lengthContainerSouth = document.querySelector('#train-length-south');
+                    let platformContainerSouth = document.querySelector('#platform-south');
+                    let colorContainerSouth = document.querySelector('#color-south');
+
+                    let destinationElement = document.createElement('p');
+                    let timeElement = document.createElement('p');
+                    let lengthElement = document.createElement('p');
+                    let platformElement = document.createElement('p');
+                    let departureColorDisplay = document.createElement('p');
+                    destinationElement.textContent = `${departureDestination}`; 
+                    timeElement.textContent = `${departureTime}`; 
+                    lengthElement.textContent = `${departureLength}`; 
+                    platformElement.textContent = `${departurePlatform}`; 
+
                     departureColorDisplay.setAttribute('id', 'departure-color-display');
                     departureColorDisplay.style['background-color'] = departureColor;
-                    Number.isInteger(parseInt(departureTime)) ? departureListing.textContent = `${departureLength}-car train heading towards ${departureDestination} 
-                        is arriving in ${departureTime} minutes on Platform ${departurePlatform}` : departureListing.textContent = `${departureLength}-car train 
-                        heading towards ${departureDestination} is ${departureTime} right now on Platform ${departurePlatform}`;
-                    departureDirection === "North" ? departureDiv.appendChild(departureListing) && departureDiv.appendChild(departureColorDisplay) 
-                    && northboundDepartures.appendChild(departureDiv) 
-                    : departureDiv.appendChild(departureListing) && departureDiv.appendChild(departureColorDisplay) && southboundDepartures.appendChild(departureDiv);
+
+                    departureDirection === "North" ? 
+                        destinationContainerNorth.appendChild(destinationElement) &&
+                        timeContainerNorth.appendChild(timeElement) &&
+                        lengthContainerNorth.appendChild(lengthElement) &&
+                        platformContainerNorth.appendChild(platformElement) && 
+                        colorContainerNorth.appendChild(departureColorDisplay) 
+                        :
+                        destinationContainerSouth.appendChild(destinationElement) &&
+                        timeContainerSouth.appendChild(timeElement) &&
+                        lengthContainerSouth.appendChild(lengthElement) &&
+                        platformContainerSouth.appendChild(platformElement) && 
+                        colorContainerSouth.appendChild(departureColorDisplay) 
+
                 }
 
             } 
